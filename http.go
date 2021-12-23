@@ -1,18 +1,18 @@
-package http
+package zdpgo_random
 
 import "net"
 
 // 获取系统中可用的端口号
-func FreePort() (int, error) {
+func (r *Random) RandomHttpPort() int {
 	addr, err := net.ResolveTCPAddr("tcp", "localhost:0")
 	if err != nil {
-		return 0, err
+		panic(err)
 	}
 
 	l, err := net.ListenTCP("tcp", addr)
 	if err != nil {
-		return 0, err
+		panic(err)
 	}
 	defer l.Close()
-	return l.Addr().(*net.TCPAddr).Port, nil
+	return l.Addr().(*net.TCPAddr).Port
 }
