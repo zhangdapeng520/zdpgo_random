@@ -7,7 +7,7 @@ import (
 
 // 获取系统中可用的端口号
 func TestRandomHttpPort(t *testing.T) {
-	r := New()
+	r := prepareRandom()
 	for i := 0; i < 10; i++ {
 		fmt.Println(r.RandomHttpPort())
 	}

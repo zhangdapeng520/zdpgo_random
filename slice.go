@@ -7,7 +7,7 @@ package zdpgo_random
 func (r *Random) RandomIntSlice(min, max, length int) []int {
 	var result []int
 	for i := 0; i < length; i++ {
-		random_int := r.RandomInt(min, max)
+		random_int := r.Int(min, max)
 		result = append(result, random_int)
 	}
 	return result
