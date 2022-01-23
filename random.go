@@ -2,28 +2,55 @@ package zdpgo_random
 
 import "github.com/zhangdapeng520/zdpgo_log"
 
+// Random 随机数据生成器核心对象
 type Random struct {
-	logPath string         // 日志路径
-	log     *zdpgo_log.Log // 日志对象
-	debug   bool           // 是否为debug模式
+	log    *zdpgo_log.Log // 日志对象
+	config *RandomConfig  // 配置对象
 }
 
-// 设置debug模式
+// RandomConfig 随机生成器配置对象
+type RandomConfig struct {
+	Debug       bool   // 是否为debug模式
+	LogFilePath string // 日志路径
+}
+
+// SetDebug 设置debug模式
 func (r *Random) SetDebug(debug bool) {
-	r.debug = debug
+	r.config.Debug = debug
 }
 
-// 设置日志路径
+// IsDebug 是否为debug模式
+func (r *Random) IsDebug() bool {
+	return r.config.Debug
+}
+
+// SetLogPath 设置日志路径
 func (r *Random) SetLogPath(logPath string) {
-	r.logPath = logPath
-	r.log = zdpgo_log.New(logPath)
-	r.log.SetDebug(r.debug)
+	r.config.LogFilePath = logPath
+	logConfig := zdpgo_log.LogConfig{
+		Debug: r.config.Debug,
+		Path:  r.config.LogFilePath,
+	}
+	l := zdpgo_log.New(logConfig)
+	r.log = l
 }
 
-// 生成随机对象
-func New() *Random {
+// New 生成随机数据对象
+func New(config RandomConfig) *Random {
 	r := Random{}
-	r.SetDebug(false)                // 默认为非debug模式
-	r.SetLogPath("zdpgo_random.log") // 默认的日志路径
+
+	// 生成日志
+	if config.LogFilePath == "" {
+		config.LogFilePath = "zdpgo_random.log"
+	}
+	logConfig := zdpgo_log.LogConfig{
+		Debug: config.Debug,
+		Path:  config.LogFilePath,
+	}
+	l := zdpgo_log.New(logConfig)
+	r.log = l
+
+	// 指定配置
+	r.config = &config
 	return &r
 }
