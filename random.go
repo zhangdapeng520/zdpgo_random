@@ -1,10 +1,12 @@
 package zdpgo_random
 
-import "github.com/zhangdapeng520/zdpgo_log"
+import (
+	"github.com/zhangdapeng520/zdpgo_zap"
+)
 
 // Random 随机数据生成器核心对象
 type Random struct {
-	log    *zdpgo_log.Log // 日志对象
+	log    *zdpgo_zap.Zap // 日志对象
 	config *RandomConfig  // 配置对象
 }
 
@@ -24,17 +26,6 @@ func (r *Random) IsDebug() bool {
 	return r.config.Debug
 }
 
-// SetLogPath 设置日志路径
-func (r *Random) SetLogPath(logPath string) {
-	r.config.LogFilePath = logPath
-	logConfig := zdpgo_log.LogConfig{
-		Debug: r.config.Debug,
-		Path:  r.config.LogFilePath,
-	}
-	l := zdpgo_log.New(logConfig)
-	r.log = l
-}
-
 // New 生成随机数据对象
 func New(config RandomConfig) *Random {
 	r := Random{}
@@ -43,12 +34,12 @@ func New(config RandomConfig) *Random {
 	if config.LogFilePath == "" {
 		config.LogFilePath = "zdpgo_random.log"
 	}
-	logConfig := zdpgo_log.LogConfig{
-		Debug: config.Debug,
-		Path:  config.LogFilePath,
-	}
-	l := zdpgo_log.New(logConfig)
-	r.log = l
+	r.log = zdpgo_zap.New(zdpgo_zap.ZapConfig{
+		Debug:        config.Debug,
+		OpenGlobal:   true,
+		OpenFileName: true,
+		LogFilePath:  config.LogFilePath,
+	})
 
 	// 指定配置
 	r.config = &config

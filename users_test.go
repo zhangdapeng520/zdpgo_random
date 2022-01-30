@@ -5,6 +5,7 @@ import (
 	"testing"
 )
 
+// 生成随机的手机号
 func TestRandom_Phone(t *testing.T) {
 	r := prepareRandom()
 	for i := 0; i < 10; i++ {
@@ -12,6 +13,7 @@ func TestRandom_Phone(t *testing.T) {
 	}
 }
 
+// 生成随机的中文名
 func TestRandom_Name(t *testing.T) {
 	r := prepareRandom()
 	for i := 0; i < 100; i++ {
@@ -22,6 +24,7 @@ func TestRandom_Name(t *testing.T) {
 	}
 }
 
+// 生成随机的英文名
 func TestRandom_EnglishName(t *testing.T) {
 	r := prepareRandom()
 	for i := 0; i < 100; i++ {
@@ -29,6 +32,7 @@ func TestRandom_EnglishName(t *testing.T) {
 	}
 }
 
+// 生成随机的邮箱
 func TestRandom_Email(t *testing.T) {
 	r := prepareRandom()
 	for i := 0; i < 100; i++ {
