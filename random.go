@@ -32,7 +32,7 @@ func New(config RandomConfig) *Random {
 
 	// 生成日志
 	if config.LogFilePath == "" {
-		config.LogFilePath = "zdpgo_random.log"
+		config.LogFilePath = "logs/zdpgo/zdpgo_random.log"
 	}
 	r.log = zdpgo_zap.New(zdpgo_zap.ZapConfig{
 		Debug:        config.Debug,

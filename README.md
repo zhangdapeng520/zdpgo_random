@@ -14,6 +14,9 @@
 - zdpgo_docker框架使用教程(头条视频)：https://www.toutiao.com/c/user/token/MS4wLjABAAAAYjNW4m-DnKcdysZrnud9Jk8G4Z44gNUTK1u7tvz_XWg/??tab=video
 - zdpgo_docker框架使用教程(BiliBili视频)：https://space.bilibili.com/384418921
 
+## 版本历史
+- 版本1.1.1 2022年2月11日
+
 ## 一、快速入门
 
 ### 1.1 生成随机可用的端口号
