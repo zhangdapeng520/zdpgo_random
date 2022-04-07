@@ -1,9 +1,20 @@
-package zdpgo_random
+package rhttp
 
-import "net"
+import (
+	"net"
+)
 
-// 获取系统中可用的端口号
-func (r *Random) RandomHttpPort() int {
+type HTTP struct {
+}
+
+func NewHTTP() *HTTP {
+	h := HTTP{}
+
+	return &h
+}
+
+// Port 获取系统中可用的端口号
+func (h *HTTP) Port() int {
 	addr, err := net.ResolveTCPAddr("tcp", "localhost:0")
 	if err != nil {
 		panic(err)

@@ -1,14 +1,19 @@
-package zdpgo_random
+package rhttp
 
 import (
 	"fmt"
 	"testing"
 )
 
+func getHttp() *HTTP {
+	return NewHTTP()
+
+}
+
 // 获取系统中可用的端口号
 func TestRandomHttpPort(t *testing.T) {
-	r := prepareRandom()
+	h := getHttp()
 	for i := 0; i < 10; i++ {
-		fmt.Println(r.RandomHttpPort())
+		fmt.Println(h.Port())
 	}
 }

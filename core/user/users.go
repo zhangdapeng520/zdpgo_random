@@ -1,39 +1,48 @@
-package zdpgo_random
+package user
 
 import (
 	"fmt"
+	"github.com/zhangdapeng520/zdpgo_random/core/rint"
 	"strings"
 )
 
-// 生成随机的用户相关的数据
+type User struct {
+	int *rint.Int
+}
+
+func NewUser() *User {
+	u := User{}
+	u.int = rint.NewInt()
+	return &u
+}
 
 // Phone 生成随机的手机号
-func (r *Random) Phone() string {
+func (u *User) Phone() string {
 	prefixs := []string{
 		"134", "135", "136", "137", "138", "139", "150", "151", "152", "157", "158", "159",
 		"182", "183", "184", "187", "188", "178", "147", "172", "198", // 中国移动
 		"130", "131", "132", "145", "155", "156", "166", "171", "175", "176", "185", "186", "166", // 中国联通
 		"133", "149", "153", "173", "177", "180", "181", "189", "199", // 中国电信
 	}
-	
+
 	// 随机取一个前缀
 	length := len(prefixs)
-	index := r.Int(0, length)
+	index := u.int.Int(0, length)
 	prefix := prefixs[index]
-	
+
 	// 8位随机数
-	num := r.Int32(10000000, 99999999)
-	
+	num := u.int.Int32(10000000, 99999999)
+
 	// 手机号 = 3个前缀 + 8个随机数
 	result := fmt.Sprintf("%s%d", prefix, num)
-	
+
 	// 返回生成的手机号
 	return result
 }
 
 // Name 生成随机的中文名
 // @param isBoy 是否为男孩
-func (r *Random) Name(isBoy bool) string {
+func (u *User) Name(isBoy bool) string {
 	// 姓
 	firstNames := []string{
 		"赵", "钱", "孙", "李", "周", "吴", "郑", "王",
@@ -108,28 +117,28 @@ func (r *Random) Name(isBoy bool) string {
 		"墨", "哈", "谯", "笪", "年", "爱", "阳", "佟",
 		"第五", "言", "福",
 	}
-	
+
 	// 女生名
 	girl := "秀娟英华慧巧美娜静淑惠珠翠雅芝玉萍红娥玲芬芳燕彩春菊兰凤洁梅琳素云莲真环雪荣爱妹霞香月莺媛艳瑞凡佳嘉琼勤珍贞莉桂娣叶璧璐娅琦晶妍茜秋珊莎锦黛青倩婷姣婉娴瑾颖露瑶怡婵雁蓓纨仪荷丹蓉眉君琴蕊薇菁梦岚苑婕馨瑗琰韵融园艺咏卿聪澜纯毓悦昭冰爽琬茗羽希宁欣飘育滢馥筠柔竹霭凝晓欢霄枫芸菲寒伊亚宜可姬舒影荔枝思丽 "
 	girls := strings.Split(girl, "")
-	
+
 	// 男生名
 	boy := "伟刚勇毅俊峰强军平保东文辉力明永健世广志义兴良海山仁波宁贵福生龙元全国胜学祥才发武新利清飞彬富顺信子杰涛昌成康星光天达安岩中茂进林有坚和彪博诚先敬震振壮会思群豪心邦承乐绍功松善厚庆磊民友裕河哲江超浩亮政谦亨奇固之轮翰朗伯宏言若鸣朋斌梁栋维启克伦翔旭鹏泽晨辰士以建家致树炎德行时泰盛雄琛钧冠策腾楠榕风航弘"
 	boys := strings.Split(boy, "")
-	
+
 	// 生成名字
-	fnIndex := r.Int(0, len(firstNames))
+	fnIndex := u.int.Int(0, len(firstNames))
 	result := ""
-	
+
 	// 男生名
 	if isBoy {
-		bIndex := r.Int(0, len(boys))
+		bIndex := u.int.Int(0, len(boys))
 		result = fmt.Sprintf("%s%s", firstNames[fnIndex], boys[bIndex])
 		return result
 	}
-	
+
 	// 女生名
-	gIndex := r.Int(0, len(girls))
+	gIndex := u.int.Int(0, len(girls))
 	result = fmt.Sprintf("%s%s", firstNames[fnIndex], girls[gIndex])
 	return result
 }
@@ -137,7 +146,7 @@ func (r *Random) Name(isBoy bool) string {
 // EnglishName 生成随机的英文名
 // @return cname 中文名
 // @return englishName 英文名
-func (r *Random) EnglishName() (cname string, englishName string) {
+func (u *User) EnglishName() (cname string, englishName string) {
 	// 名称列表
 	names := []string{
 		"Aaron",
@@ -710,7 +719,7 @@ func (r *Random) EnglishName() (cname string, englishName string) {
 		"Vita",
 		"Vivian",
 	}
-	
+
 	namesZh := []string{
 		"亚伦",
 		"亚伯",
@@ -1282,20 +1291,20 @@ func (r *Random) EnglishName() (cname string, englishName string) {
 		"维达",
 		"薇薇安",
 	}
-	
-	index := r.Int(0, len(names))
+
+	index := u.int.Int(0, len(names))
 	englishName, cname = names[index], namesZh[index]
 	return
 }
 
 // Email 生成随机的邮箱
 // @return email 邮箱账号
-func (r *Random) Email() (email string) {
+func (u *User) Email() (email string) {
 	suffix := []string{
 		"@qq.com", "@163.com", "@126.com", "@189.com",
 		"@outlook.com", "gmail.com", "yahoo.com",
 	}
-	_, name := r.EnglishName()
-	email = fmt.Sprintf("%s%s", name, suffix[r.Int(0, len(suffix))])
+	_, name := u.EnglishName()
+	email = fmt.Sprintf("%s%s", name, suffix[u.int.Int(0, len(suffix))])
 	return
 }
