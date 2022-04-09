@@ -2,8 +2,14 @@ package str
 
 import (
 	"math/rand"
+	"strconv"
+	"strings"
 	"time"
 )
+
+func init() {
+	rand.Seed(time.Now().UnixNano()) // 随机的种子
+}
 
 type Str struct {
 }
@@ -15,6 +21,7 @@ func NewStr() *Str {
 }
 
 // Str 生成指定长度的随机字符串
+// 掩码加强版：rand.Int63会产生63bit的随机数，如果我们把它分成6份，那么一次就可以产生10个6bit的随机数。这样就减少了浪费。
 func (s *Str) Str(n int) string {
 	// 数据源
 	const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -40,4 +47,22 @@ func (s *Str) Str(n int) string {
 		remain--
 	}
 	return string(b)
+}
+
+// IntStr 生成随机长度的数字
+func (s *Str) IntStr(n int) string {
+	// 检查参数合法性
+	if n <= 0 {
+		return "0"
+	}
+
+	// 生成随机数字组成的字符串
+	var arr []string
+	for i := 0; i < n; i++ {
+		num := rand.Intn(10)
+		numS := strconv.Itoa(num)
+		arr = append(arr, numS)
+	}
+	result := strings.Join(arr, "")
+	return result
 }
