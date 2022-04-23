@@ -16,13 +16,13 @@ type Random struct {
 	User   *user.User    // 生成随机的用户数据
 }
 
-// RandomConfig 随机生成器配置对象
-type RandomConfig struct {
-	Debug bool // 是否为debug模式
+// New 生成随机数据对象
+func New() *Random {
+	return NewWithConfig(RandomConfig{})
 }
 
-// New 生成随机数据对象
-func New(config RandomConfig) *Random {
+// NewWithConfig 根据配置生成随机数对象
+func NewWithConfig(config RandomConfig) *Random {
 	r := Random{}
 
 	// 指定配置
