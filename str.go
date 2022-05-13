@@ -1,28 +1,14 @@
-package str
+package zdpgo_random
 
 import (
 	"math/rand"
 	"strconv"
 	"strings"
-	"time"
 )
-
-func init() {
-	rand.Seed(time.Now().UnixNano()) // 随机的种子
-}
-
-type Str struct {
-}
-
-func NewStr() *Str {
-	s := Str{}
-
-	return &s
-}
 
 // Str 生成指定长度的随机字符串
 // 掩码加强版：rand.Int63会产生63bit的随机数，如果我们把它分成6份，那么一次就可以产生10个6bit的随机数。这样就减少了浪费。
-func (s *Str) Str(n int) string {
+func (s *Random) Str(n int) string {
 	// 数据源
 	const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	const (
@@ -31,7 +17,7 @@ func (s *Str) Str(n int) string {
 		letterIdxMax  = 63 / letterIdxBits   // # of letter indices fitting in 63 bits
 	)
 
-	var src = rand.NewSource(time.Now().UnixNano())
+	var src = rand.NewSource(rand.Int63())
 	b := make([]byte, n)
 
 	// A src.Int63() generates 63 random bits, enough for letterIdxMax characters!
@@ -50,7 +36,7 @@ func (s *Str) Str(n int) string {
 }
 
 // IntStr 生成随机长度的数字
-func (s *Str) IntStr(n int) string {
+func (s *Random) IntStr(n int) string {
 	// 检查参数合法性
 	if n <= 0 {
 		return "0"

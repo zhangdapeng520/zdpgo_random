@@ -1,17 +1,13 @@
-package user
+package zdpgo_random
 
 import (
 	"fmt"
 	"testing"
 )
 
-func getUser() *User {
-	return NewUser()
-}
-
 // 生成随机的手机号
 func TestRandom_Phone(t *testing.T) {
-	u := getUser()
+	u := getRandom()
 	for i := 0; i < 10; i++ {
 		fmt.Println(u.Phone())
 	}
@@ -19,7 +15,7 @@ func TestRandom_Phone(t *testing.T) {
 
 // 生成随机的中文名
 func TestRandom_Name(t *testing.T) {
-	u := getUser()
+	u := getRandom()
 	for i := 0; i < 100; i++ {
 		fmt.Println(u.Name(true))
 	}
@@ -30,7 +26,7 @@ func TestRandom_Name(t *testing.T) {
 
 // 生成随机的英文名
 func TestRandom_EnglishName(t *testing.T) {
-	u := getUser()
+	u := getRandom()
 	for i := 0; i < 100; i++ {
 		fmt.Println(u.EnglishName())
 	}
@@ -38,7 +34,7 @@ func TestRandom_EnglishName(t *testing.T) {
 
 // 生成随机的邮箱
 func TestRandom_Email(t *testing.T) {
-	u := getUser()
+	u := getRandom()
 	for i := 0; i < 100; i++ {
 		fmt.Println(u.Email())
 	}

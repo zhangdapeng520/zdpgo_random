@@ -16,3 +16,11 @@
 **/mtest*
 **/*.log
 **/target
+**/logs
+**/*.exe~
+**/.vscode
+**/__pycache__
+**/test*
+**/secret
+**/xj*
+
