@@ -1,5 +1,7 @@
 package zdpgo_random
 
+import "github.com/zhangdapeng520/zdpgo_log"
+
 /*
 @Time : 2022/5/13 10:32
 @Author : 张大鹏
@@ -9,7 +11,5 @@ package zdpgo_random
 */
 
 func getRandom() *Random {
-	return NewWithConfig(Config{
-		Debug: true,
-	})
+	return New(zdpgo_log.Tmp)
 }
