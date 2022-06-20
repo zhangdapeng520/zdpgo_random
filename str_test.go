@@ -1,13 +1,16 @@
 package zdpgo_random
 
-import "testing"
+import (
+	"github.com/zhangdapeng520/zdpgo_log"
+	"testing"
+)
 
 // 测试随机字符串的生成
 func TestStr_str(t *testing.T) {
-	s := getRandom()
+	r := New(zdpgo_log.Tmp)
 	var data []string
 	for i := 0; i < 1000; i++ {
-		tmp := s.Str(16)
+		tmp := r.Str(16)
 		data = append(data, tmp)
 		if i > 1 {
 			if data[i] == data[i-1] {
@@ -19,10 +22,10 @@ func TestStr_str(t *testing.T) {
 
 // 测试生成指定长度的随机数字符串
 func TestStr_intStr(t *testing.T) {
-	s := getRandom()
+	r := New(zdpgo_log.Tmp)
 	var data []string
 	for i := 0; i < 1000; i++ {
-		tmp := s.IntStr(16)
+		tmp := r.IntStr(16)
 		data = append(data, tmp)
 		if i > 1 {
 			if data[i] == data[i-1] {
