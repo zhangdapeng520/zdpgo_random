@@ -1,7 +1,6 @@
 package zdpgo_random
 
 import (
-	"github.com/zhangdapeng520/zdpgo_log"
 	"testing"
 )
 
@@ -14,7 +13,7 @@ import (
 */
 
 func TestRandom_RandomArticle(t *testing.T) {
-	r := New(zdpgo_log.Tmp)
+	r := New()
 	//article := r.RandomArticle()
 	//fmt.Println(article.Title, article.Author, article.Content)
 	for i := 0; i < 1000; i++ {

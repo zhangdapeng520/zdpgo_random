@@ -1,7 +1,6 @@
 package zdpgo_random
 
 import (
-	"github.com/zhangdapeng520/zdpgo_log"
 	"testing"
 )
 
@@ -14,12 +13,12 @@ import (
 */
 
 func TestRandom_New(t *testing.T) {
-	r := New(zdpgo_log.Tmp)
+	r := New()
 	if r == nil {
 		panic(r)
 	}
 
-	r = NewWithConfig(&Config{}, zdpgo_log.Tmp)
+	r = NewWithConfig(&Config{})
 	if r == nil {
 		panic(r)
 	}

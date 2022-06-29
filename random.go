@@ -1,7 +1,6 @@
 package zdpgo_random
 
 import (
-	"github.com/zhangdapeng520/zdpgo_log"
 	"math/rand"
 	"time"
 )
@@ -12,21 +11,17 @@ func init() {
 
 // Random 随机数据生成器核心对象
 type Random struct {
-	Config *Config        // 配置对象
-	Log    *zdpgo_log.Log // 日志对象
+	Config *Config // 配置对象
 }
 
 // New 生成随机数据对象
-func New(log *zdpgo_log.Log) *Random {
-	return NewWithConfig(&Config{}, log)
+func New() *Random {
+	return NewWithConfig(&Config{})
 }
 
 // NewWithConfig 通过配置生成随机数据对象
-func NewWithConfig(config *Config, log *zdpgo_log.Log) *Random {
+func NewWithConfig(config *Config) *Random {
 	r := Random{}
-
-	// 日志
-	r.Log = log
 
 	// 指定配置
 	r.Config = config
